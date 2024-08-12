@@ -1,0 +1,61 @@
+[gd_scene load_steps=6 format=3 uid="uid://dcivaejue4hyn"]
+
+[ext_resource type="Script" path="res://addons/visioncone2d/VisionCone2D.cs" id="1_av1kv"]
+[ext_resource type="Script" path="res://addons/visioncone2d/VisionConeResource.cs" id="2_imxj0"]
+
+[sub_resource type="Resource" id="Resource_kh3ke"]
+script = ExtResource("2_imxj0")
+Accuracy = 25
+Angle = 2.387
+Radius = 200.0
+
+[sub_resource type="Resource" id="Resource_24j6q"]
+script = ExtResource("2_imxj0")
+Accuracy = 10
+Angle = 1.36
+Radius = 300.0
+
+[sub_resource type="Resource" id="Resource_qxdw4"]
+script = ExtResource("2_imxj0")
+Accuracy = 10
+Angle = 3.35
+Radius = 100.0
+
+[node name="VisionCone2D" type="Node2D" node_paths=PackedStringArray("nearArea", "nearShape", "farArea", "farShape", "rangeArea", "rangeShape")]
+show_behind_parent = true
+light_mask = 0
+script = ExtResource("1_av1kv")
+nearArea = NodePath("Near Area")
+nearShape = NodePath("Near Area/Near Collider")
+nearVisionCone = SubResource("Resource_kh3ke")
+farArea = NodePath("Far Area")
+farShape = NodePath("Far Area/Far Collider")
+farVisionCone = SubResource("Resource_24j6q")
+rangeArea = NodePath("Range Area")
+rangeShape = NodePath("Range Area/Range Collider")
+rangeVisionCone = SubResource("Resource_qxdw4")
+DrawInGame = true
+
+[node name="Near Area" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+collision_mask = 2
+
+[node name="Near Collider" type="CollisionPolygon2D" parent="Near Area"]
+polygon = PackedVector2Array(0, 0, 73.6817, -185.933, 91.072, -178.062, 107.633, -168.568, 123.213, -157.539, 137.671, -145.075, 150.874, -131.29, 162.704, -116.308, 173.051, -100.267, 181.821, -83.3123, 188.936, -65.5989, 194.329, -47.2879, 197.952, -28.5462, 199.772, -9.54437, 199.772, 9.54437, 197.952, 28.5462, 194.329, 47.2879, 188.936, 65.5989, 181.821, 83.3124, 173.051, 100.267, 162.704, 116.308, 150.874, 131.29, 137.671, 145.075, 123.213, 157.539, 107.633, 168.568, 91.072, 178.062, 73.6817, 185.933)
+
+[node name="Far Area" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+collision_mask = 2
+
+[node name="Far Collider" type="CollisionPolygon2D" parent="Far Area"]
+polygon = PackedVector2Array(0, 0, 233.272, -188.638, 256.694, -155.269, 275.375, -119.032, 288.971, -80.5975, 297.23, -40.6743, 300, 0, 297.23, 40.6743, 288.971, 80.5975, 275.375, 119.032, 256.694, 155.269, 233.272, 188.638)
+
+[node name="Range Area" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+collision_mask = 2
+
+[node name="Range Collider" type="CollisionPolygon2D" parent="Range Area"]
+polygon = PackedVector2Array(0, 0, -10.4015, -99.4576, 22.8753, -97.3484, 53.6088, -84.4162, 78.3822, -62.0986, 94.441, -32.8769, 100, 0, 94.441, 32.8769, 78.3822, 62.0986, 53.6088, 84.4162, 22.8753, 97.3484, -10.4015, 99.4576)
